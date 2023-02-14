@@ -1,0 +1,21 @@
+
+
+const key = 'RqEGPG37FzXvjq4iKWHWQDuX03we7sVP';
+
+export const getGifs = async( category ) => {
+
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=${ key }&q=${ category }&limit=10`
+    const resp = await fetch( url );
+    const { data } = await resp.json();
+
+    const gifs = data.map(img => {
+        return {
+            id: img.id,
+            title: img.title,
+            url: img.images.downsized_medium.url
+        }
+    });
+
+    return gifs;
+
+}
